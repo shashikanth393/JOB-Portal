@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Internship Courses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #C060A1; 
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        #course-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .course-card {
+            width: 300px;
+            background-color: #EDE4FF;
+            margin: 10px;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            display: flex; /* Display icon and content in a row */
+            flex-direction: column; /* Stack icon and content vertically */
+            align-items: center; 
+            text-align: center; 
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-card h2 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: #333;
+        }
+
+        .course-card p {
+            font-size: 1rem;
+            color: #555;
+            margin: 5px 0;
+        }
+        .icon {
+            font-size: 2rem; /* Increase icon size */
+            color: #1a73e8; /* Use the same bright blue as the header for icons */
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            z-index: 999; /* Ensure the popup is on top */
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            width: 700px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+       
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .applyButton {
+            background-color: #C060A1; /* Purple color */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px; /* Text color */
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Available Courses </h1>
+    </header>
+    <section id="course-list">
+        
+    </section>
+
+    <div id="course-popup" class="popup">
+        <div class="popup-content"style="background-color: #f8f8f8; padding: 20px; border-radius: 10px;display: flex; flex-direction: column; align-items: center;">
+            <span class="close-popup" onclick="closePopup()">&times;</span>
+            <h2 style="margin-bottom: 15px;">Course Application</h2>
+            <div style="display: flex; align-items: center;">
+                <img src="https://thumbs.dreamstime.com/b/tv-show-leader-asks-contestant-questions-vector-cartoon-quiz-intellectual-game-selects-winner-181539186.jpg" alt="Course Image" style="max-width: 50%; margin-right: 10px; border-radius: 5px;">
+                <p style="flex: 1; font-size: 25px; color: #1a73e8;"><b>
+
+                To enroll for this course, you will need to pass a basic quiz. </b></p><br>
+                
+            </div>
+            <a href="quiz.html" style="display: inline-block; background-color: #1a73e8; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 15px;">Start Quiz</a>
+           
+           
+            
+        </div>
+    </div>
+
+    <script>
+       
+
+    
+    const courses = [
+    {
+        title: "Introduction to Web Development",
+        icon: "fa-laptop-code",
+        instructor: "John Doe",
+        duration: "4 weeks",
+    },
+    {
+        title: "Digital Marketing Fundamentals",
+        icon: "fa-chart-line",
+        instructor: "Jane Smith",
+        duration: "3 weeks",
+    },
+    {
+        title: "Data Science Basics",
+        icon: "fa-chart-bar",
+        instructor: "Michael Johnson",
+        duration: "5 weeks",
+    },
+    {
+        title: "UX Design Fundamentals",
+        icon: "fa-paint-brush",
+        instructor: "Emily Brown",
+        duration: "3 weeks",
+    },
+    {
+        title: "Project Management Essentials",
+        icon: "fa-tasks",
+        instructor: "David Lee",
+        duration: "4 weeks",
+    },
+];
+
+// Function to create a course card
+function openPopup() {
+    const popup = document.getElementById("course-popup");
+    popup.style.display = "block";
+}
+
+function closePopup() {
+    const popup = document.getElementById("course-popup");
+    popup.style.display = "none";
+}
+
+function createCourseCard(course) {
+
+
+    const courseCard = document.createElement("div");
+    courseCard.className = "course-card";
+
+    const iconElement = document.createElement("i");
+    iconElement.className = "icon fas " + course.icon;
+
+    const titleElement = document.createElement("h2");
+    titleElement.textContent = course.title;
+
+    const instructorElement = document.createElement("p");
+    instructorElement.textContent = "Instructor: " + course.instructor;
+
+    const durationElement = document.createElement("p");
+    durationElement.textContent = "Duration: " + course.duration;
+
+    const applyButton = document.createElement("button");
+    applyButton.textContent = "Apply Now";
+    applyButton.className = "applyButton"; 
+    applyButton.addEventListener("click", openPopup);
+    
+ 
+
+
+    courseCard.appendChild(iconElement);
+    courseCard.appendChild(titleElement);
+    courseCard.appendChild(instructorElement);
+    courseCard.appendChild(durationElement);
+    courseCard.appendChild(applyButton);
+
+
+    return courseCard;
+}
+
+// Function to display courses on the webpage
+function displayCourses() {
+    const courseList = document.getElementById("course-list");
+    courseList.innerHTML = ""; // Clear existing content
+
+    courses.forEach(course => {
+        const courseCard = createCourseCard(course);
+        courseList.appendChild(courseCard);
+    });
+}
+
+// Call the displayCourses function when the page loads
+window.addEventListener("load", displayCourses);
+
+    </script>
+</body>
+</html>
